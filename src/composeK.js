@@ -19,21 +19,28 @@ var map = require('./map');
  * @return {Function}
  * @example
  *
+ *      import Maybe from 'maybe'; 
+ *      // https://github.com/ramda/ramda-fantasy/blob/master/src/Maybe.js
+ *      import R from 'ramda';
+ *      import S from 'sanctuary';
+ *      // https://github.com/plaid/sanctuary
+ *
  *      //  parseJson :: String -> Maybe *
  *      //  get :: String -> Object -> Maybe *
  *
  *      //  getStateCode :: Maybe String -> Maybe String
  *      var getStateCode = R.composeK(
- *        R.compose(Maybe.of, R.toUpper),
- *        get('state'),
- *        get('address'),
- *        get('user'),
- *        parseJson
+ *          R.compose( Maybe.of, R.toUpper ),
+ *          S.get( 'state' ),
+ *          S.get( 'address' ),
+ *          S.get( 'user' ),
+ *          S.parseJson
  *      );
  *
- *      getStateCode(Maybe.of('{"user":{"address":{"state":"ny"}}}'));
+ *      getStateCode( Maybe.of( '{"user":{"address":{"state":"ny"}}}' ) );
  *      //=> Just('NY')
- *      getStateCode(Maybe.of('[Invalid JSON]'));
+ * 
+ *      getStateCode( Maybe.of( '[Invalid JSON]' ) );
  *      //=> Nothing()
  */
 module.exports = function composeK() {
